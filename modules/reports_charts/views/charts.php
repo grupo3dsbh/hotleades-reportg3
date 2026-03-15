@@ -1,6 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <?php init_head(); ?>
 
+<!-- Reports Charts Module assets -->
+<link rel="stylesheet" href="<?php echo module_dir_url('reports_charts', 'assets/css/reports_charts.css'); ?>">
+
 <div id="wrapper">
   <div class="content">
 
@@ -246,6 +249,11 @@
     </div>
   </div>
 </div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<!-- Reports Charts Module JS -->
+<script src="<?php echo module_dir_url('reports_charts', 'assets/js/reports_charts.js'); ?>"></script>
 
 <!-- Pass PHP config to the JS module -->
 <script>

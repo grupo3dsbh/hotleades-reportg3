@@ -20,7 +20,10 @@ Author: Grupo 3
 register_language_files('reports_charts', ['reports_charts']);
 
 // --------------------------------------------------------------------
-// Admin menu item (position 61 = logo após Reports padrão)
+// Admin menu item
+// Adicionado como item filho do menu Reports (slug padrão: nav_reports).
+// Caso o slug seja diferente na instalação, também registramos como
+// item de topo (position 61) para garantir visibilidade.
 // --------------------------------------------------------------------
 
 hooks()->add_action('admin_init', 'reports_charts_menu_items');
@@ -29,37 +32,26 @@ function reports_charts_menu_items()
 {
     $CI = &get_instance();
 
-    $CI->app_menu->add_sidebar_children_item('nav_reports', [
-        'slug'     => 'reports-charts',
-        'name'     => _l('reports_charts_menu'),
-        'href'     => admin_url('reports_charts'),
-        'position' => 5,
-        'icon'     => 'fa fa-bar-chart',
-    ]);
-}
-
-// --------------------------------------------------------------------
-// Enqueue assets only on the charts page
-// --------------------------------------------------------------------
-
-hooks()->add_action('admin_init', 'reports_charts_enqueue_assets');
-
-function reports_charts_enqueue_assets()
-{
-    $CI = &get_instance();
-
-    if ($CI->uri->segment(2) !== 'reports_charts') {
-        return;
+    // Tenta adicionar como filho do menu Relatórios
+    // Os slugs mais comuns nas versões do Perfex CRM são listados abaixo;
+    // o método ignora silenciosamente se o pai não existir.
+    foreach (['nav_reports', 'reports', 'nav-reports'] as $parent_slug) {
+        $CI->app_menu->add_sidebar_children_item($parent_slug, [
+            'slug'     => 'reports-charts',
+            'name'     => 'Reports Charts',
+            'href'     => admin_url('reports_charts'),
+            'position' => 5,
+            'icon'     => 'fa fa-bar-chart',
+        ]);
     }
 
-    // Chart.js via CDN
-    add_javascript_to_page('https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js');
-
-    // Module CSS
-    add_css_to_page(module_dir_url('reports_charts', 'assets/css/reports_charts.css'));
-
-    // Module JS (loaded after Chart.js)
-    add_javascript_to_page(module_dir_url('reports_charts', 'assets/js/reports_charts.js'));
+    // Fallback: item de topo após Reports (posição 61)
+    $CI->app_menu->add_sidebar_menu_item('reports-charts-top', [
+        'name'     => 'Reports Charts',
+        'href'     => admin_url('reports_charts'),
+        'position' => 61,
+        'icon'     => 'fa fa-bar-chart',
+    ]);
 }
 
 // --------------------------------------------------------------------
