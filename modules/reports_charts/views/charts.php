@@ -174,7 +174,12 @@ window.RCConfig = {
 </script>
 
 <script>
-(function ($) {
+function reportsChartsInit() {
+  if (typeof jQuery === 'undefined' || typeof Chart === 'undefined') {
+    setTimeout(reportsChartsInit, 50);
+    return;
+  }
+  (function ($) {
   'use strict';
 
   var STATUS_UNPAID  = 1, STATUS_PAID = 2, STATUS_PARTIAL = 3;
@@ -386,11 +391,11 @@ window.RCConfig = {
     S.type=$(this).data('type');if(S.rows.length)renderChart();
   });
 
-  $(document).ready(function(){
-    if(typeof Chart!=='undefined'){fetchData();}
-    else{var t=setInterval(function(){if(typeof Chart!=='undefined'){clearInterval(t);fetchData();}},100);}
-  });
-}(jQuery));
+  fetchData();
+
+  }(jQuery));
+}
+reportsChartsInit();
 </script>
 
 <?php init_tail(); ?>
