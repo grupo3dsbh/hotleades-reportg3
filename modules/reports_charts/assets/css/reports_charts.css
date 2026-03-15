@@ -1,0 +1,207 @@
+/* =============================================================================
+   Reports Charts Module — Stylesheet
+   ============================================================================= */
+
+/* ---- Wrapper ---------------------------------------------------------------- */
+.reports-charts-wrap {
+  margin-bottom: 30px;
+}
+
+/* ---- Toolbar ---------------------------------------------------------------- */
+.chart-period-group .btn,
+.chart-type-group .btn {
+  border-radius: 4px;
+  font-size: 13px;
+}
+.chart-period-group .btn.active,
+.chart-type-group .btn.active {
+  background-color: #337ab7;
+  color: #fff;
+  border-color: #2e6da4;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.15);
+}
+#custom-period-inputs {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+/* ---- Summary Cards ---------------------------------------------------------- */
+.summary-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.summary-card {
+  display: flex;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.12);
+  border-left: 5px solid #aaa;
+  gap: 14px;
+  transition: box-shadow .2s;
+}
+.summary-card:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,.18);
+}
+.summary-card .card-icon {
+  font-size: 30px;
+  opacity: .6;
+  min-width: 36px;
+  text-align: center;
+}
+.summary-card .card-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: #888;
+  margin-bottom: 4px;
+}
+.summary-card .card-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.2;
+}
+.summary-card .card-count {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 2px;
+}
+
+/* Status colours */
+.card-total   { border-left-color: #17a2b8; }
+.card-total   .card-icon { color: #17a2b8; }
+.card-paid    { border-left-color: #28a745; }
+.card-paid    .card-icon { color: #28a745; }
+.card-pending { border-left-color: #dc3545; }
+.card-pending .card-icon { color: #dc3545; }
+.card-partial { border-left-color: #ffc107; }
+.card-partial .card-icon { color: #ffc107; }
+
+/* ---- Chart Panel ------------------------------------------------------------ */
+.chart-panel {
+  position: relative;
+  min-height: 280px;
+}
+.chart-panel .panel-body {
+  padding: 20px;
+}
+.chart-wrap {
+  position: relative;
+}
+.chart-loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  color: #337ab7;
+}
+.chart-empty-state {
+  text-align: center;
+  padding: 50px 0;
+}
+
+/* ---- Gantt Chart ------------------------------------------------------------ */
+.gantt-table {
+  width: 100%;
+  table-layout: fixed;
+}
+.gantt-table th,
+.gantt-table td {
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.gantt-table th:nth-child(1),
+.gantt-table td:nth-child(1) { width: 130px; }
+.gantt-table th:nth-child(2),
+.gantt-table td:nth-child(2) { width: 160px; }
+.gantt-table th:nth-child(3),
+.gantt-table td:nth-child(3) { width: 100px; }
+.gantt-table th:nth-child(4),
+.gantt-table td:nth-child(4) { width: auto; }
+
+.gantt-track-cell { padding: 6px 8px; }
+.gantt-track {
+  position: relative;
+  height: 22px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.gantt-bar {
+  position: absolute;
+  height: 100%;
+  border-radius: 3px;
+  min-width: 6px;
+  cursor: pointer;
+  transition: filter .15s;
+}
+.gantt-bar:hover { filter: brightness(1.15); }
+
+.gantt-paid    { background: rgba(40,167,69,.80);  }
+.gantt-unpaid  { background: rgba(220,53,69,.80);  }
+.gantt-partial { background: rgba(255,193,7,.85);  }
+
+/* ---- Modal: Invoice List ---------------------------------------------------- */
+#modal-invoices-list .modal-dialog {
+  margin-top: 60px;
+}
+.modal-summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 12px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+.modal-sum-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.modal-sum-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: #555;
+}
+.modal-sum-value {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#modal-invoices-table thead th {
+  background: #f5f5f5;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: #666;
+  border-bottom: 2px solid #ddd;
+}
+#modal-invoices-table tbody tr:hover {
+  background-color: #f0f7ff;
+}
+
+/* ---- Responsive tweaks ----------------------------------------------------- */
+@media (max-width: 767px) {
+  .summary-card {
+    padding: 12px;
+  }
+  .summary-card .card-value {
+    font-size: 18px;
+  }
+  .chart-period-group .btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  .gantt-table th:nth-child(2),
+  .gantt-table td:nth-child(2) { display: none; }
+}
